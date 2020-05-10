@@ -11,6 +11,10 @@ public class Task implements Serializable {
         this.desc = desc;
     }
 
+    public Task() {
+
+    }
+
     public String getTitle() {
         return title;
     }

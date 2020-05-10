@@ -11,10 +11,12 @@ import android.widget.Toast;
 
 import com.twodev.taskapp.R;
 import com.twodev.taskapp.models.Task;
+import com.twodev.taskapp.ui.OnItemClickListener;
 
 public class FormActivity extends AppCompatActivity {
     private EditText editTitle;
     private EditText editDesc;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +35,8 @@ public class FormActivity extends AppCompatActivity {
     public void onClick(View view) {
         String title = editTitle.getText().toString().trim();
         String desc = editDesc.getText().toString().trim();
-        if (title.isEmpty()|| desc.isEmpty()){
-            Toast.makeText(this,"fill in Task and description task",Toast.LENGTH_LONG).show();
+        if (title.isEmpty()){
+            Toast.makeText(this,"fill in title and description task",Toast.LENGTH_LONG).show();
         }else {
             Task task = new Task(title, desc);
             Intent intent = new Intent();
@@ -45,4 +47,5 @@ public class FormActivity extends AppCompatActivity {
 
 
     }
+
 }

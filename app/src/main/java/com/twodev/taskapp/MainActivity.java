@@ -2,17 +2,25 @@ package com.twodev.taskapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Button;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.twodev.taskapp.models.Task;
+import com.twodev.taskapp.ui.OnItemClickListener;
+import com.twodev.taskapp.ui.home.HomeFragment;
+import com.twodev.taskapp.ui.home.TaskAdapter;
+import com.twodev.taskapp.ui.onBoard.OnBoardActivity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -21,13 +29,28 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+    Task task1;
+    OnItemClickListener onItemClickListener;
+
+    public MainActivity() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (true){
+            startActivity(new Intent(this, OnBoardActivity.class));
+            finish();
+            return;
+        }
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -35,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               startActivityForResult(new Intent(MainActivity.this, FormActivity.class),100);
+                startActivityForResult(new Intent(MainActivity.this, FormActivity.class), 100);
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -60,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_exit:
                 Log.d("lala", "exit ");
                 finish();
@@ -76,13 +99,15 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode==100){
-            Task task = (Task) data.getSerializableExtra("task");
-            Log.d("result: ","title - "+task.getTitle());
-            Log.d("result: ","desc - "+task.getDesc());
+        if (resultCode == RESULT_OK && requestCode == 100) {
+          task1 = (Task) data.getSerializableExtra("task");
+            Log.d("lala", "onActivityResult: "+task1.getTitle());
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+            fragment.getChildFragmentManager().getFragments().get(0).onActivityResult(requestCode, resultCode, data);
         }
     }
 }
