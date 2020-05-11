@@ -7,4 +7,7 @@
     <color name="button_text_color">#FFFFFF</color>
     <color name="active_colors">#FFFFFF</color>
     <color name="inactive_colors">#ACA7A7</color>
+    <color name="board_1_color">#A91212</color>
+    <color name="board_2_color">#039BE5</color>
+    <color name="board_3_color">#B514DF</color>
 </resources>

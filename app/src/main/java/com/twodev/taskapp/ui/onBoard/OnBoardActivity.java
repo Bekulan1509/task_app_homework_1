@@ -41,10 +41,10 @@ public class OnBoardActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             Bundle bundle = new Bundle();
-            bundle.putInt("pos",position);
+            bundle.putInt("pos", position);
             BoardFragment fragment = new BoardFragment();
             fragment.setArguments(bundle);
-            return fragment ;
+            return fragment;
         }
 
         @Override
@@ -52,7 +52,6 @@ public class OnBoardActivity extends AppCompatActivity {
             return 3;
         }
     }
-
 
 
     @Override
@@ -67,6 +66,7 @@ public class OnBoardActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_skip:
                 startActivity(new Intent(OnBoardActivity.this, MainActivity.class));
+                finish();
                 break;
         }
         return super.onOptionsItemSelected(item);

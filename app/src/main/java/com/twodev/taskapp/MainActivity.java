@@ -1,6 +1,8 @@
 package com.twodev.taskapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
@@ -8,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -38,14 +41,13 @@ public class MainActivity extends AppCompatActivity {
     Task task1;
     OnItemClickListener onItemClickListener;
 
-    public MainActivity() {
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (true){
+
+
+        if (!isShown(false)) {
             startActivity(new Intent(this, OnBoardActivity.class));
             finish();
             return;
@@ -74,6 +76,12 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
+    private Boolean isShown(boolean value) {
+        SharedPreferences preferences = getSharedPreferences("settings", Context.MODE_PRIVATE);
+        return preferences.getBoolean("isShown", value);
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -85,8 +93,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_exit:
-                Log.d("lala", "exit ");
-                finish();
+               if (isShown(false)){
+                   startActivity(new Intent(this,OnBoardActivity.class));
+                   finish();
+               }
         }
         return super.onOptionsItemSelected(item);
 
@@ -104,10 +114,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == 100) {
-          task1 = (Task) data.getSerializableExtra("task");
-            Log.d("lala", "onActivityResult: "+task1.getTitle());
+            task1 = (Task) data.getSerializableExtra("task");
+            Log.d("lala", "onActivityResult: " + task1.getTitle());
             Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
             fragment.getChildFragmentManager().getFragments().get(0).onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+
+    public void headerClick(View view) {
+         startActivity(new Intent(MainActivity.this, ProFileActivity.class));
     }
 }

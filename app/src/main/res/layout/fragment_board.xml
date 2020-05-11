@@ -7,6 +7,7 @@
     android:orientation="vertical"
     android:padding="32dp"
     android:gravity="center_horizontal"
+    android:id="@+id/linear"
     tools:context=".ui.onBoard.BoardFragment">
 
    <ImageView
