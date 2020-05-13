@@ -39,9 +39,10 @@ public class FormActivity extends AppCompatActivity {
             Toast.makeText(this,"fill in title and description task",Toast.LENGTH_LONG).show();
         }else {
             Task task = new Task(title, desc);
-            Intent intent = new Intent();
-            intent.putExtra("task", task);
-            setResult(RESULT_OK, intent);
+            App.getInstance().getDataBase().taskDao().insert(task);
+//            Intent intent = new Intent();
+//            intent.putExtra("task", task);
+//            setResult(RESULT_OK, intent);
             finish();
         }
 

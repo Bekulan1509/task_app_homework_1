@@ -13,9 +13,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.twodev.taskapp.App;
 import com.twodev.taskapp.MainActivity;
 import com.twodev.taskapp.R;
 import com.twodev.taskapp.models.Task;
@@ -23,6 +25,7 @@ import com.twodev.taskapp.ui.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class HomeFragment extends Fragment  {
 
@@ -42,23 +45,36 @@ public class HomeFragment extends Fragment  {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        list.addAll(App.getInstance().getDataBase().taskDao().getAll());
 
 
 
         adapter = new TaskAdapter(list);
         recyclerView.setAdapter(adapter);
+        loadData();
         //  adapter.setOnItemClickListener(HomeFragment.this);
 
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-       Task task1 = (Task) data.getSerializableExtra("task");
-      // Task task = (Task) getArguments().getSerializable("task");
-       list.add(task1);
-       adapter.notifyDataSetChanged();
+    private void loadData() {
+        App.getInstance().getDataBase().taskDao().getAllLive().observe(this, new Observer<List<Task>>() {
+            @Override
+            public void onChanged(List<Task> tasks) {
+                list.clear();
+                list.addAll(tasks);
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//       Task task1 = (Task) data.getSerializableExtra("task");
+//      // Task task = (Task) getArguments().getSerializable("task");
+//       list.add(task1);
+//       adapter.notifyDataSetChanged();
+//    }
 
 }
 

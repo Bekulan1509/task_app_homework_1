@@ -56,19 +56,25 @@ public class BoardFragment extends Fragment {
                 textTitle.setTextColor(Color.WHITE);
                 imageView.setImageResource(R.drawable.naruto_1);
                 button.setVisibility(View.INVISIBLE);
+
                 linearLayout.setBackgroundColor(getResources().getColor(R.color.board_1_color));
-                //  button.setBackgroundColor(getResources().getColor(R.color.BLUE));
+
                 break;
             case 1:
                 textTitle.setText("how are you?");
                 textTitle.setTextColor(Color.WHITE);
                 imageView.setImageResource(R.drawable.naruto_2);
                 button.setVisibility(View.INVISIBLE);
+
                 linearLayout.setBackgroundColor(getResources().getColor(R.color.board_2_color));
+
                 break;
             case 2:
                 imageView.setImageResource(R.drawable.naruto_3);
+
                 linearLayout.setBackgroundColor(getResources().getColor(R.color.board_3_color));
+
+
                 textTitle.setText("what are you doing?");
                 textTitle.setTextColor(Color.WHITE);
                 button.setOnClickListener(new View.OnClickListener() {
