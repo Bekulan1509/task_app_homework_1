@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="20dp"
     tools:context=".login.PhoneActivity">
 
 
-<!--    <EditText-->
-<!--        android:id="@+id/editPhone"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:hint="Enter the code"-->
-<!--        android:inputType="phone" />-->
+    <!--    <EditText-->
+    <!--        android:id="@+id/editPhone"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:hint="Enter the code"-->
+    <!--        android:inputType="phone" />-->
 
 
     <com.github.pinball83.maskededittext.MaskedEditText
         android:id="@+id/editPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/edit_rounded"
         android:inputType="phone"
+        android:padding="10dp"
         app:mask="(+996)*** *** *** "
         app:notMaskedSymbol="*" />
 
@@ -29,24 +33,35 @@
         android:id="@+id/buttonPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/button_rounded_gradient"
         android:onClick="onClick"
-        android:text="continue" />
+        android:padding="12dp"
+        android:text="continue"
+        android:textColor="@android:color/white" />
 
     <EditText
         android:id="@+id/editCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/edit_rounded"
         android:hint="Enter the code"
-        android:inputType="phone" />
+        android:inputType="phone"
+        android:padding="10dp" />
 
     <Button
         android:id="@+id/buttonCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/get_started" />
-
-
-
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/button_rounded"
+        android:padding="12dp"
+        android:text="@string/get_started"
+        android:textColor="@android:color/white" />
 
 
 </LinearLayout>

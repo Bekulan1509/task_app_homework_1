@@ -27,8 +27,8 @@ import java.util.concurrent.TimeUnit;
 public class PhoneActivity extends AppCompatActivity {
     private EditText editText;
     private EditText editCode;
-    private  Button buttonPhone;
-    private  Button buttonCode;
+    private Button buttonPhone;
+    private Button buttonCode;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks callbacks;
 
     @Override
@@ -49,6 +49,11 @@ public class PhoneActivity extends AppCompatActivity {
             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
                 Log.e("Phone", "onVerificationCompleted: ");
                 Toast.makeText(PhoneActivity.this, "onVerificationCompleted", Toast.LENGTH_SHORT).show();
+                editText.setVisibility(View.GONE);
+                buttonPhone.setVisibility(View.GONE);
+                editCode.setVisibility(View.VISIBLE);
+                buttonCode.setVisibility(View.VISIBLE);
+                editCode.setText(phoneAuthCredential.getSmsCode());
                 singIn(phoneAuthCredential);
             }
 
@@ -62,13 +67,12 @@ public class PhoneActivity extends AppCompatActivity {
             public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                 super.onCodeSent(s, forceResendingToken);
                 Log.e("Phone", "onCodeSent: ");
+                Log.e("Phone", "onCodeSent: " + s);
                 Toast.makeText(PhoneActivity.this, "onCodeSent", Toast.LENGTH_SHORT).show();
 
-                editText.setVisibility(View.GONE);
-                buttonPhone.setVisibility(View.GONE);
 
-                editCode.setVisibility(View.VISIBLE);
-                buttonCode.setVisibility(View.VISIBLE);
+             //   editCode.setText((CharSequence) forceResendingToken);
+
 
 
             }
@@ -82,8 +86,8 @@ public class PhoneActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     startActivity(new Intent(PhoneActivity.this, MainActivity.class));
                     finish();
-                } else{
-                    Toast.makeText(PhoneActivity.this,"Error",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(PhoneActivity.this, "Error", Toast.LENGTH_SHORT).show();
                 }
             }
         });
