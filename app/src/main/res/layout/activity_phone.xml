@@ -2,20 +2,51 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:padding="16dp"
     tools:context=".login.PhoneActivity">
-    <EditText
+
+
+<!--    <EditText-->
+<!--        android:id="@+id/editPhone"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Enter the code"-->
+<!--        android:inputType="phone" />-->
+
+
+    <com.github.pinball83.maskededittext.MaskedEditText
         android:id="@+id/editPhone"
-        android:inputType="phone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        app:mask="(+996)*** *** *** "
+        app:notMaskedSymbol="*" />
+
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onClick"
-        android:text="continue"/>
+        android:text="continue" />
+
+    <EditText
+        android:id="@+id/editCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter the code"
+        android:inputType="phone" />
+
+    <Button
+        android:id="@+id/buttonCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/get_started" />
+
+
+
+
 
 </LinearLayout>

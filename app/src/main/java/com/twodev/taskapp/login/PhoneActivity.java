@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,6 +26,9 @@ import java.util.concurrent.TimeUnit;
 
 public class PhoneActivity extends AppCompatActivity {
     private EditText editText;
+    private EditText editCode;
+    private  Button buttonPhone;
+    private  Button buttonCode;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks callbacks;
 
     @Override
@@ -32,11 +36,19 @@ public class PhoneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone);
         editText = findViewById(R.id.editPhone);
+        editCode = findViewById(R.id.editCode);
+        buttonPhone = findViewById(R.id.buttonPhone);
+        buttonCode = findViewById(R.id.buttonCode);
+
+
+        editCode.setVisibility(View.GONE);
+        buttonCode.setVisibility(View.GONE);
+
         callbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override
             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
                 Log.e("Phone", "onVerificationCompleted: ");
-                Toast.makeText(PhoneActivity.this, "Done", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PhoneActivity.this, "onVerificationCompleted", Toast.LENGTH_SHORT).show();
                 singIn(phoneAuthCredential);
             }
 
@@ -50,6 +62,15 @@ public class PhoneActivity extends AppCompatActivity {
             public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                 super.onCodeSent(s, forceResendingToken);
                 Log.e("Phone", "onCodeSent: ");
+                Toast.makeText(PhoneActivity.this, "onCodeSent", Toast.LENGTH_SHORT).show();
+
+                editText.setVisibility(View.GONE);
+                buttonPhone.setVisibility(View.GONE);
+
+                editCode.setVisibility(View.VISIBLE);
+                buttonCode.setVisibility(View.VISIBLE);
+
+
             }
         };
     }
@@ -70,6 +91,9 @@ public class PhoneActivity extends AppCompatActivity {
 
     public void onClick(View view) {
         String phone = editText.getText().toString().trim();
+
         PhoneAuthProvider.getInstance().verifyPhoneNumber(phone, 60, TimeUnit.SECONDS, this, callbacks);
+
+
     }
 }
