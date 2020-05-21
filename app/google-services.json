@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1096285929449",
+    "firebase_url": "https://task-app-da4ec.firebaseio.com",
+    "project_id": "task-app-da4ec",
+    "storage_bucket": "task-app-da4ec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096285929449:android:47cbc8ac296b6cf5dd9578",
+        "android_client_info": {
+          "package_name": "com.twodev.taskapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1096285929449-7qugabkgr8umke782jc84hoppvnbso44.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfU5-zJBIWXONJJMaCZNb9qJJ6L-m3uXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1096285929449-7qugabkgr8umke782jc84hoppvnbso44.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

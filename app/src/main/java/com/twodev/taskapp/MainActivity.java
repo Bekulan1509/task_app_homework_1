@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.twodev.taskapp.login.PhoneActivity;
 import com.twodev.taskapp.models.Task;
 import com.twodev.taskapp.ui.OnItemClickListener;
 import com.twodev.taskapp.ui.home.HomeFragment;
@@ -49,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
 
         if (!isShown(false)) {
             startActivity(new Intent(this, OnBoardActivity.class));
+            finish();
+            return;
+        }
+        if (FirebaseAuth.getInstance().getCurrentUser()==null){
+            startActivity(new Intent(this, PhoneActivity.class));
             finish();
             return;
         }

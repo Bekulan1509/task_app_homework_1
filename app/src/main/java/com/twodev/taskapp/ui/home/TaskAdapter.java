@@ -1,9 +1,11 @@
 package com.twodev.taskapp.ui.home;
 
-import android.content.Intent;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,12 +15,9 @@ import com.twodev.taskapp.R;
 import com.twodev.taskapp.models.Task;
 import com.twodev.taskapp.ui.OnItemClickListener;
 
-import org.w3c.dom.Text;
-
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 
-public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> implements OnItemClickListener {
+public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder>  {
     private ArrayList<Task> list;
     private OnItemClickListener onItemClickListener;
 
@@ -48,36 +47,42 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         this.onItemClickListener = onItemClickListener;
     }
 
-    @Override
-    public void onItemClickListener(int position) {
-
-    }
-
-    @Override
-    public void communicateActivityFragment(Task task) {
-        list.add(task);
-    }
 
     public class TaskViewHolder extends RecyclerView.ViewHolder {
         TextView textTitle;
         TextView textDesc;
+        LinearLayout linearLayout;
 
         public TaskViewHolder(@NonNull View itemView) {
             super(itemView);
             textTitle = itemView.findViewById(R.id.textTitle);
             textDesc = itemView.findViewById(R.id.tv_desc);
+            linearLayout = itemView.findViewById(R.id.linear);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemClickListener.onItemClickListener(getAdapterPosition());
+                   onItemClickListener.onItemClickListener(getAdapterPosition());
+               //     onItemClickListener.onItemClick(textDesc.getText().toString(),textTitle.getText().toString());
+                    Log.d("lala", "VH onClick: ");
+
+                }
+            });
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    onItemClickListener.onItemLongClickListener(getAdapterPosition());
+                    return true;
                 }
             });
         }
 
-        public void bind(Task task){
+        public void bind(Task task) {
             textTitle.setText(task.getTitle());
             textDesc.setText(task.getDesc());
-
+            if (getAdapterPosition() % 2 == 0) {
+                linearLayout.setBackgroundColor(Color.GRAY);
+            }else linearLayout.setBackgroundColor(Color.WHITE);
         }
     }
 }

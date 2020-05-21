@@ -16,6 +16,7 @@ import com.twodev.taskapp.ui.OnItemClickListener;
 public class FormActivity extends AppCompatActivity {
     private EditText editTitle;
     private EditText editDesc;
+    private Task task;
 
 
     @Override
@@ -28,23 +29,28 @@ public class FormActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("New task");
         }
-
-
+        task = (Task) getIntent().getSerializableExtra("task");
+        if (task!=null){
+            editTitle.setText(task.getTitle());
+            editDesc.setText(task.getDesc());
+        }
     }
 
     public void onClick(View view) {
         String title = editTitle.getText().toString().trim();
         String desc = editDesc.getText().toString().trim();
-        if (title.isEmpty()){
-            Toast.makeText(this,"fill in title and description task",Toast.LENGTH_LONG).show();
-        }else {
-            Task task = new Task(title, desc);
-            App.getInstance().getDataBase().taskDao().insert(task);
-//            Intent intent = new Intent();
-//            intent.putExtra("task", task);
-//            setResult(RESULT_OK, intent);
-            finish();
+        if (task!=null){
+            task.setTitle(title);
+            task.setDesc(desc);
+            App.getInstance().getDataBase().taskDao().update(task);
         }
+        else {
+             task = new Task(title, desc);
+             task.setTitle(title);
+             task.setDesc(desc);
+            App.getInstance().getDataBase().taskDao().insert(task);
+        }
+        finish();
 
 
     }
