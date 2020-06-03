@@ -9,9 +9,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.twodev.taskapp.R;
 import com.twodev.taskapp.models.Task;
 import com.twodev.taskapp.ui.OnItemClickListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class FormActivity extends AppCompatActivity {
     private EditText editTitle;
@@ -39,6 +43,12 @@ public class FormActivity extends AppCompatActivity {
     public void onClick(View view) {
         String title = editTitle.getText().toString().trim();
         String desc = editDesc.getText().toString().trim();
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("description",desc);
+        map.put("Task",title);
+        FirebaseFirestore.getInstance().collection("tasks").add(map);
+
         if (task!=null){
             task.setTitle(title);
             task.setDesc(desc);

@@ -40,4 +40,10 @@
         android:name="com.twodev.taskapp.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_fireStore"
+        android:name="com.twodev.taskapp.ui.firestore.FireStoreFragment"
+        android:label="@string/menu_firestore"
+        tools:layout="@layout/fire_store_fragment" />
 </navigation>

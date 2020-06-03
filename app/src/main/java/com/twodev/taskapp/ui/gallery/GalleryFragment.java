@@ -56,16 +56,16 @@ public class GalleryFragment extends Fragment {
     }
 
     private void getPermissions() {
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED){
-getFiles();
-        }else
-             requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},101);
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            getFiles();
+        } else
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 101);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode==101){
+        if (requestCode == 101) {
             getPermissions();
         }
     }

@@ -2,11 +2,12 @@ package com.twodev.taskapp;
 
 import android.app.Application;
 
+import androidx.multidex.MultiDexApplication;
 import androidx.room.Room;
 
 import com.twodev.taskapp.room.AppDataBase;
 
-public class App extends Application {
+public class App extends MultiDexApplication {
 
     private AppDataBase dataBase;
     public static  App instance;
